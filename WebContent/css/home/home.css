@@ -1,0 +1,106 @@
+.a-board{
+    position: relative;
+    left: 20px;
+    top:  20px;
+  }
+  .delete-board{
+      position: relative;
+      right: -29%;
+      top:   25px;
+      background-color: transparent;
+      border: 0px;
+  } 
+  .edit-board{
+      position: relative;
+      right: 40px;
+      top:   25px;
+      background-color: transparent;
+      border: 0px;
+  } 
+  #add-column{
+      background-color: transparent;
+  }
+  #imgbtn{
+      width: 60px;
+      outline: none;
+  }
+  .card-header{
+      height: 65px;
+  }
+  .board{
+      box-sizing: border-box;
+      padding: 5px 5px 50px 5px;
+      border: 1px solid rgba(200,200,200,0.5);
+      border-radius: 4px;
+      margin: 4px;
+      float: left;
+  }
+  .created-board{
+      width: 213px;
+      height: 133px;
+  }
+  .card{
+      border: 0px;
+  }
+  #board_name{
+      position: relative;
+      top: 10px
+  }
+  .a-card{
+      position: relative;
+      top: 25px;
+      background-color: transparent;
+  }
+  .navbar{
+      background-color: black;
+ }
+ #logo{
+      width: 50px;  
+ }
+ .btn-so{
+      color:rgb(80, 74, 74); 
+      background-color:rgb(255, 255, 255);
+      position: relative; 
+      left: 15%;
+ }
+ .container{
+      margin-top:30px;
+ }
+ h3{
+      color: black;
+ }
+#nav-link1, #nav-link2{
+     color: #fff;
+     background-color: rgb(107, 64, 187);
+     width: 200px;
+     box-shadow: 1px 2px black;
+     outline:none;
+}
+#nav-link2{
+	position: relative;
+	top: 10px;
+}
+button#s-btn {
+    position: relative;
+    top: -35px;
+    left: 380px;
+}
+div#modal-c {
+    position: relative;
+    top: -30px;
+}
+ .btn-d{
+     background-color: transparent;
+     position: relative;
+     top: 20px;
+     left: 10px;
+ }
+ .btn:focus, .btn:active:focus, .btn.active:focus{
+      outline:none;
+      box-shadow:none;
+  }
+  button#d-btn {
+    position: relative;
+    left: 380px;
+    top: -35px;
+}

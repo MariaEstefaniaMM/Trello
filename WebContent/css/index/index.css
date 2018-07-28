@@ -1,0 +1,55 @@
+#logo{
+    width: 390px; 
+    height: 150px;
+  }
+  .navbar{
+    background-color:rgb(70, 68, 68);
+  }
+  #nav-logo{
+    width: 50px;  
+  }
+  .btn-si{
+    color:rgb(80, 74, 74);
+    background-color:rgb(255, 255, 255); 
+  }
+  .btn-so{
+    color:rgb(80, 74, 74);
+    background-color:rgb(255, 255, 255); 
+    position: relative;
+    left: 15%;
+  }
+  #jumbotron1{
+    margin-bottom:0; 
+    background-color: rgb(107, 73, 201); 
+    color: white;
+  }
+  #jumbotron2{
+    margin-bottom:0; 
+    background-color:rgb(47, 61, 139);
+  }
+  #link1{
+    color:#E6E6E6;
+  }
+  h2{
+    margin: 0 auto; 
+    max-width:900px;
+  }
+  .card1{
+    background-color:rgb(71, 55, 219);
+  }
+  .card2{
+    background-color:rgb(97, 25, 155);
+  }
+  .card3{
+    background-color:rgb(73, 64, 194);
+  }
+  .card4{
+    background-color:rgb(25, 50, 194);
+  }
+  .card-text, h3{
+    color: white;
+  }
+  .btn:focus, .btn:active:focus, .btn.active:focus{
+    outline:none;
+    box-shadow:none;
+  }

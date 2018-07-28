@@ -1,0 +1,39 @@
+.form-group{
+    position: relative;
+    left: 400px;
+ }
+ .btn-secondary{
+   position: relative;
+   left: 400px;
+ }
+ .navbar{
+   background-color:rgb(70, 68, 68);
+ }
+ #logo{
+   width: 50px;  
+ }
+ .btn-si{
+   color:rgb(80, 74, 74);
+   background-color:rgb(255, 255, 255); 
+   right: -25%;
+ }
+ .btn-so{
+   color:rgb(80, 74, 74); 
+   background-color:rgb(255, 255, 255);
+   position: relative; 
+   left: 15%;
+ }
+ .jumbotron{
+   margin-bottom:0; 
+   background-color: rgb(107, 65, 146); 
+   color: white;
+ }
+ #a-v:visited {
+   color:#ffffff;
+ }
+ .form-control{
+   width: 300px;
+ }
+ .btn-secondary{
+   background-color:blueviolet;
+ }

@@ -1,0 +1,271 @@
+.deck-container {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.card-deck {
+    margin: 0 !important;
+    width: 200%;
+}
+.card-header {
+    background-color: rgb(128, 88, 190);
+    color: beige;
+}
+.add-column {
+    height: 100px;
+    top: 30%;
+}
+.column {
+    box-sizing: border-box;
+    padding: 5px 5px 50px 5px;
+    border: 1px solid rgba(200,200,200,0.5);
+    border-radius: 4px;
+    margin: 4px;
+    float: left;
+}
+.column > * , #created-column > *{
+    width: 270px;
+}
+.card {
+    margin: 0 0 15px 0 !important;
+    width: 250px;
+    height: 175px;
+    top: 10px;
+    border: 1px solid;
+}
+#div1{
+    width: 350px;
+    height: 70px;
+    padding: 10px;
+    border: 1px solid;
+}
+.i-header, #column_name{
+    width: 180px;
+    height: 28px;
+    position: relative;
+    right: 16px;
+}
+#c-header{
+    width: 180px;
+    height: 28px;
+    position: relative;
+    left: 10px;
+    top: 10px;
+}
+#card-a{
+    position: relative;
+    right: 10px;			
+}
+.card-header{
+    height: 55px;
+}
+.column-header{ 
+    height: 65px;
+}
+.a-card{
+    position: relative;
+    left: -30px;
+    top: 10px;
+    background-color: transparent;
+}
+.delete-column{
+    position: relative;
+    left: 154px;
+    top: -30px;
+    background-color: transparent;
+}
+.edit-column{
+    position: relative;
+    left: 125px;
+    top: -30px;
+    background-color: transparent;	
+    outline: none;
+}
+
+.a-column{
+    position: relative;
+    left: 100px;
+    top: -30px;
+    background-color: transparent;
+    border: 0px;	
+    outline: none;
+}
+.add-card{
+    position: relative;
+    top: 10px;
+    background-color: transparent;
+}
+.btn-c{
+    position: relative;
+    top: -5px;
+    left: 20px;
+}
+#card-crear{
+    border: 0px;
+}
+.edit-card{
+    position: relative;
+    left: -25px;
+    top: 10px;
+    background-color: transparent;
+}
+.delete-card{
+    position: relative;				
+    top: 10px;
+    background-color: transparent;
+    left: -20px;
+}
+a{
+    color: white;
+}
+#edit-columna{
+    position: relative;
+    left: 128px;
+    top: -30px;
+}
+#a-columna{
+    position: relative;
+    left: 100px;
+    top: -30px;
+}           
+#board-name{
+	width: 100%;
+	text-align: right;
+    color: white;
+}
+#header-input{
+    position: relative;
+    top: -30px;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus{
+    outline:none;
+    box-shadow:none;
+}
+.navbar{
+    background-color:black;
+   }
+#logo{
+    width: 50px;  
+   }
+.btn-so{
+    color:rgb(80, 74, 74);
+    background-color:rgb(255, 255, 255); 
+    right: -25%;
+}
+.nav-item {
+	margin-right: 10px;
+}
+.btn-h{
+    color:rgb(80, 74, 74); 
+    background-color:rgb(255, 255, 255);
+}
+button.btn.add-colaborador {
+    background-color: white;
+}
+.btn-d{
+    background-color: transparent;
+    top: 5px;
+    position: relative;
+}
+button#s-btn {
+    position: relative;
+    left: 380px;
+    top: -35px;
+}
+button#delete-colab {
+    top: -70px;
+    position: relative;
+    left: 300px;
+    background-color: transparent;
+}
+button#edit-colab {
+    position: relative;
+    top: -70px;
+    left: 200px;
+    background-color: transparent;
+}
+img#c-img {
+    position: relative;
+    left: -40px;
+    width: 15px;
+}
+.c-card {
+    background-color: transparent;
+    position: relative;
+    top: -30px;
+    left: 132px;
+}
+.list-c{
+	list-style: none;
+}
+textarea.textarea2 {
+    position: relative;
+    top: 15px;
+    width: 430px;
+    height: 50px;
+    resize: none;
+    left: -35px;
+}
+button#file-btn {
+    position: relative;
+    top: -32px;
+    left: 125px;
+    background-color: transparent;
+}
+h5.username-c {
+    position: relative;
+    left: -35px;
+    top: 15px;
+    font-family: monospace;
+    font-size: 13px;
+    color: slategray;
+}
+.modal2{
+    width: 600px;
+}
+#s-btn2{
+    position: relative;
+    left: 460px;
+    top: -35px;
+}
+h7.comment-created {
+    color: darkgray;
+    font-size: 13px;
+    position: relative;
+    left: -30px;
+}
+ul#myUl2 {
+    position: relative;
+    left: 40px;
+}
+button#addFiles-btn {
+    background-color: transparent;
+    position: relative;
+    top: -30px;
+    left: 500px;
+}
+button.delete-file.btn {
+    background-color: transparent;
+    position: relative;
+    left: 220px;
+    top: -38px;
+}
+button.download-file.btn {
+    background-color: transparent;
+    position: relative;
+    left: 120px;
+    top: -38px;
+}
+.filediv > * {
+    border: 1px solid;
+    position: relative;
+    left: -20px;
+    top: 10px;
+}
+div#modal3 {
+    width: 600px;
+}
+h5.name-f {
+    position: relative;
+    left: -30px;
+}

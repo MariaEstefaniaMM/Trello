@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>EasyTab</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="./css/bootstrap/bootstrap.min.css">
+		<link rel="stylesheet" href="./css/boards/boards.css">
+		<link  href="css/font-awesome.min.css">
+		<script src="./js/jquery/jquery-3.3.1.min.js"></script>
+		<script src="./js/bootstrap/bootstrap.min.js"></script>
+		<script type="text/javascript" src="./js/boards/boards.js"></script>
+		<script src='./js/fetch.js'></script>
+  		<script src='./js/main.js'></script>
+		<link rel="shortcut icon" href="img/easyTAB.ico"/>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-sm sticky-top" style="background-color: black">
+			<a class="navbar-brand" href="home.html">
+				<img src="img/navlogo.png" id="logo">
+			</a>
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<button type="button" onclick="logout()" class="btn btn-so" role="button">LOGOUT</button>
+			</li>
+			<li class="nav-item">
+					<a href="home.html" class="btn btn-h" role="button">BOARDS</a>
+				</li>
+				<li class="nav-item">
+					<button class="btn add-colaborador" type="button"  id="modal-btn" data-toggle="modal" data-target="#myModal"><img src="img/ic_group_add_black_36dp.png" style="width: 25px;"></button>
+				</li>
+				<li class="nav-item b">
+				</li>
+			</ul>
+		</nav>
+					<!-- The Modal 1-->
+		  <div class="modal fade" id="myModal">
+		      <div class="modal-dialog">
+				  <div class="modal-content">
+				  <!-- Modal Header -->
+					 <div class="modal-header">
+						<h4 class="modal-title">ADD COLLABORATOR</h4>
+						<button type="button" class="close" data-dismiss="modal"></button>
+					</div>
+					<!-- Modal body -->
+					<div class="modal-body">
+						<input class="form-control form-control-sm ml-3 w-75 removeOnFocus" id= "colab" type="text" placeholder="example: lupita" >
+						<button type="button" class="btn" id="s-btn" onclick="addColab()">ADD</button>
+						<i class="fab fa-apper"></i>
+						<div class="container" id="modal-c">
+							<ul class="list" id="myUl">
+							</ul>
+						</div>
+					</div>
+				    <!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		       <!-- The Modal 2-->
+		 <div class="modal fade" id="myModal2">
+		      <div class="modal-dialog">
+				  <div class="modal-content modal2">
+				  <!-- Modal Header -->
+					 <div class="modal-header">
+						<h4 class="modal-title">COMMENTS</h4>
+						<button type="button" class="close" data-dismiss="modal"></button>
+					</div>
+					<!-- Modal body -->
+					<div class="modal-body">
+						<input class="form-control form-control-sm ml-3 w-75 removeOnFocus" id="comments" type="text" placeholder="Add comments" >
+						<button type="button" class="btn btn-2" id="s-btn2" onclick="addComments(idcard)">ADD</button>
+						<div class="container" id="modal-c">
+							<ul class="list" id="myUl2">
+							</ul>
+						</div>
+					</div>
+				    <!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+					<!-- The Modal 3 -->
+		  <div class="modal fade" id="myModal3">
+		      <div class="modal-dialog">
+				  <div class="modal-content" id="modal3">
+				  <!-- Modal Header -->
+					 <div class="modal-header">
+						<h4 class="modal-title">UPLOAD FILES</h4>		
+						<button type="button" class="close" data-dismiss="modal"></button>						
+					</div>
+					<!-- Modal body -->
+					<div class="modal-body">			
+							<input type="file" class="form-control-file select-file" multiple id="files"/>
+						    <button type="button" class="btn" id="addFiles-btn" onclick="upFile()" title="Upload File" data-toggle="tooltip"><img src="img/ic_file_upload_black_36dp.png" alt="add"style="width: 25px;"></button>
+							<h3 id="uploadStatus"></h3>					
+							<div class="container" id="modal-c">
+							<ul class="list" id="myUl3">
+							</ul>
+						</div>
+					</div>
+				    <!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="deck-container">
+			<div class="card-deck" id="card-deck">
+				<div class="column" id="add-columns">
+					<div class="card" id="card-crear">
+						<div class="card-body text-center">
+							<div class="card-header" id="header-input"><input id="column_name" type="text" class="form-control" placeholder="Titulo de la Columna" />
+							<br>
+							<button type="button" class="btn add-column" onclick="add_column()"> AÑADIR COLUMNA</button>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+				
+		<script type="text/javascript" src="./js/boards/boards.js"></script>
+	
+	</body>
+</html>
+
+
