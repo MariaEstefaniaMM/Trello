@@ -69,7 +69,12 @@
  h3{
       color: black;
  }
-#nav-link1, #nav-link2{
+ #admin{
+    color: white;
+    position: relative;
+    left: 40px;
+}
+#nav-link1, #nav-link2, #nav-link3{
      color: #fff;
      background-color: rgb(107, 64, 187);
      width: 200px;
@@ -79,6 +84,10 @@
 #nav-link2{
 	position: relative;
 	top: 10px;
+}
+a#nav-link3 {
+    position: relative;
+    top: 20px;
 }
 button#s-btn {
     position: relative;
