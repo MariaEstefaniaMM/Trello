@@ -499,3 +499,16 @@
     		console.log(url);
     		var downloadWindow = window.open(url);
     }
+
+    //------------ADMIN-----------------
+    
+   /* function showUser(){
+    	//$('#search-user').val();
+        //-------
+            $(` <li id="li-user"><h4>${username}</h4></li>                				
+               `).appendTo(".list1");     			
+        //-------- if length == 0 {
+           $("#li-m").replaceWith($(`<h4 id="empty"><b>${$('#search-user').val()}</b> does not exist</h4>               				
+               `).appendTo(".list1")); }
+	} */
+    
