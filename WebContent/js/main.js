@@ -2,6 +2,7 @@
 	var columns;
 	var cards;
 	var comments;
+	var users;
 	var desType;
 	var date= new Date();
 	
@@ -47,7 +48,10 @@
         fetching(data, 'POST', './Login').then ((data) => {
                 console.log(data);
                 if(data.status==200){
-                	window.location.href="home.html"
+                	if (data.isAdmin)
+                		window.location.href="admin.html"
+                	else
+                		window.location.href="home.html"
                 }else{
                 	alert(data.response);
                 }
@@ -77,10 +81,11 @@
 	}
         
     function deleteBoard(id){
+    	url = './Board?board_id='+ id
     	let data = {
 				board_id: id,
 		}
-        fetching(data, 'DELETE', './Board').then((data) => {
+        fetching(data, 'DELETE', url).then((data) => {
                 console.log(data);
                 if(data.status!=200)
                 	alert(data.response);
@@ -89,12 +94,13 @@
 	}
     
     function updateBoard(board_id){
+    	url = './Board?board_id='+ board_id
     	var string = '#'+board_id
 		let data = {
                board_id: board_id,
                new_board_name: $(string).val(),
 		}
-        fetching(data, 'PUT', './Board').then((data) => {
+        fetching(data, 'PUT', url).then((data) => {
                 console.log(data);
                 if(data.status!=200)
                 	alert(data.response);
@@ -155,6 +161,7 @@
     function updateColumn(column_id, board_id){
     	var string = '#'+column_id+'1'
     	url = './Column?board_id='+ board_id + '&column_id='+ column_id
+    	
     	console.log($(string).val());
 		let data = {               
                column_id: column_id,
@@ -366,7 +373,7 @@
 				comment_text: $('#comments').val()
 		}
 		console.log(data)
-        fetching(data, 'POST', url ).then((data) => {
+        fetching(data, 'POST', url).then((data) => {
                 console.log(data);
                 if(data.status==200){  
                 	console.log(id, $('#comments').val());
@@ -385,7 +392,7 @@
 			   new_comment: $(string).val()
 		}
 		console.log(data)
-        fetching(data, 'PUT', url ).then((data) => {
+        fetching(data, 'PUT', url).then((data) => {
                 console.log(data);
                 if(data.status!=200)
                 	alert(data.response);
@@ -397,7 +404,7 @@
 		let data = {
 				comment_id : comment_id,
 		}
-        fetching(data, 'DELETE', url ).then((data) => {
+        fetching(data, 'DELETE', url).then((data) => {
                 console.log(data);
                 if(data.status!=200){
                 	alert(data.response);
@@ -435,12 +442,16 @@
     		  var file = files[i];
     		  formData.append('files[]', file, file.name);
     	}
+		//let data = {
+			//	card_id: card_id,
+		//}
+		//console.log(data)
     	let datajson = {
                 method: 'POST',
                 body: formData,
                 withCredentials: true,
                 credentials: 'include',
-                contentType: false,
+                contentType:false,
             };
             fetch(url, datajson)
             .then((res) => res.json())
@@ -461,11 +472,12 @@
             })
     }
     
-    function deleteFile(file_id, board_id, file_name){
+    function deleteFile(file_id, board_id, file_name, card_id){
     	url = './Files?board_id='+ board_id +'&file_id='+ file_id
 		let data = {
 	            file_id: file_id,
-	            file_name: file_name
+	            file_name: file_name,
+	            card_id: card_id
 		}
         fetching(data, 'DELETE', url).then((data) => {
                 console.log(data)
@@ -482,33 +494,57 @@
     	url = './Files?id='+ id
         fetching({}, 'GET', url ).then((data) => {
         		files = data.files
-                console.log(files);
+                console.log(files)
                 if(data.status==200){
                 	for (var i=0; i<files.length; i++){
-                    	crear_files(files[i][0], files[i][1], files[i][2], files[i][3], files[i][4]);
+                    	crear_files(files[i][0], files[i][1], files[i][2], files[i][3], files[i][4])
                     }
                }else{
-               		alert(data.response);
+               		alert(data.response)
                } 
                 
             })
 	}
     
-    function download (file_name) {
-    		url = "./GetFile?name="+file_name;
+    function download (file_name, card_id) {
+    		url = "./GetFile?name="+file_name+'&file_id='+ card_id;
     		console.log(url);
     		var downloadWindow = window.open(url);
     }
 
     //------------ADMIN-----------------
     
-   /* function showUser(){
-    	//$('#search-user').val();
-        //-------
-            $(` <li id="li-user"><h4>${username}</h4></li>                				
-               `).appendTo(".list1");     			
-        //-------- if length == 0 {
-           $("#li-m").replaceWith($(`<h4 id="empty"><b>${$('#search-user').val()}</b> does not exist</h4>               				
-               `).appendTo(".list1")); }
-	} */
+    function showUser(){
+    	url = './Signup?username='+ $('#search-user').val();
+    	fetching({}, 'GET', url ).then((data) => {
+    		users = data.users
+            console.log(users)
+            if(data.status==200){
+            	if (users.length == 0) {
+                    $("#li-user").replaceWith($(`<h4 id="empty"><b>${$('#search-user').val()}</b> does not exist</h4>               				
+                        `).appendTo(".list1"));
+            	} else
+            		$(".users").remove();
+	            	for (var i=0; i<users.length; i++){
+	            		$(` <li id="li-user" class = "${users[i][0]} users"><h4>${users[i][3]}</h4></li>                				
+	                    `).appendTo(".list1");
+	                }
+           }else{
+           		alert(data.response)
+           } 
+            
+        })   
+	}
+    
+    function deleteUser(user_id){
+    	let data = {
+				user_id: user_id,
+		}
+        fetching(data, 'DELETE', './Signup').then((data) => {
+                console.log(data);
+                if(data.status!=200)
+                	alert(data.response);
+                
+            })
+	}
     

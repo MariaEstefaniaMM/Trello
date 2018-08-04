@@ -38,7 +38,7 @@
                   <a class="nav-link active" href="#" id="nav-link2" id="modal-btn" data-toggle="modal"data-target="#myModal" >SEARCH BOARDS</a> 
               </li>
               <li class="nav-item">
-                  <a class="nav-link active" href="#" id="nav-link3" id="modal-btn1" data-toggle="modal"data-target="#myModal1" >SEARCH USERS</a> 
+                  <a class="nav-link active" href="#" id="nav-link3" id="modal-btn1" data-toggle="modal"data-target="#myModal1" onclick="showModal1();" >SEARCH USERS</a> 
               </li>
           </ul>
           <!-- The Modal search boards -->
@@ -78,7 +78,7 @@
 					<!-- Modal body -->
 					<div class="modal-body">
 						<input class="form-control form-control-sm ml-3 w-75" id="search-user" type="text" placeholder="Search" aria-label="Search">
-						<button type="button" class="btn" id="s-btn" onclick="showBoard()">SEARCH</button>
+						<button type="button" class="btn" id="su-btn" onclick="showUser()">SEARCH</button>
 						<div class="container" id="modal-c">
 							<ul class="list1" id="myUl1">
 							</ul>

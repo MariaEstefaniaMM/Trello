@@ -19,6 +19,14 @@ var column = `
 function add_board() { 
 	$(column).insertBefore( $("#card-crear").parent());
 }
+
+function showModal1(){
+	 console.log("modal")
+    $("#myModal1").modal();
+    showUser();
+    console.log("modal")
+};
+
 $(document).ready(function(){
 	//Delete board
 	$(document).on("click", ".btn-d", function() {
@@ -32,9 +40,7 @@ $(document).ready(function(){
 		 location.reload();
 	     $("#myModal").show();
 	 });
-	 $("#modal-btn1").click(function(){
-	     $("#myModal1").modal();
-	 });
+	 
 	 $("#myModal1").on('hidden.bs.modal',function(e){
 		 location.reload();
 	     $("#myModal1").show();
@@ -49,6 +55,11 @@ $(document).ready(function(){
 		$("#empty").remove();
 		$("#li-m").remove();
 	});
+	 
+	 $(document).on("click", "#su-btn", function() {
+			$("#empty").remove();
+			$("#li-user").remove();
+		});
 });
 
 function edit (button) {
