@@ -87,7 +87,25 @@ public class DataBase {
 	public int getCard(Integer column_id, String name) {
 		return getItem(column_id, name, prop.getValue("query_getCard"), "card_id");
 	}
+	//------ CHECK USER_ID IN COLUMN ------
 	
+	public int checkBoard(Integer board_id) {
+		int id =0;
+		System.out.println(prop.getValue("query_checkBoard"));
+		try {
+			this.pstmt = con.prepareStatement(prop.getValue("query_checkBoard"));
+			this.pstmt.setInt(1, board_id);
+			this.rs = this.pstmt.executeQuery();
+			if(this.rs.next()) {
+				id = this.rs.getInt("user_id");
+			}
+		} catch (SQLException e) {
+			System.out.println("error");
+			System.out.println(e. getMessage());
+			e.printStackTrace();
+		}
+		return id;
+	}	
 	//------ CHECK USER_ID IN COLUMN ------
 	
 		public int checkColumn(Integer column_id) {
@@ -295,6 +313,11 @@ public class DataBase {
                 delete(card_id, prop.getValue("query_deleteCard"));
 	}
     
+    public void deleteUser(Integer user_id) {
+        System.out.println(prop.getValue("query_deleteUser"));
+                delete(user_id, prop.getValue("query_deleteUser"));
+	}    
+    
   //-----   UPDATE  --------------
     
     public void updateColumn(Integer column_id, String newName) {
@@ -351,6 +374,7 @@ public class DataBase {
 			this.pstmt = con.prepareStatement(prop.getValue("query_admin"));
 			this.pstmt.setString(1,email);
 			this.rs = this.pstmt.executeQuery();
+			this.rs.next();
 			if(this.rs.getString("type_id").equals("1")) {
 				state = true;
 			}
@@ -360,6 +384,62 @@ public class DataBase {
 		return state;
 	}
 	
+	//----- SEARCH ALL USERS------------
+	
+		public Object[][] allUsers() {
+			Object array[][]=null;
+			System.out.println(prop.getValue("query_getAllUsers"));
+			try {
+				this.pstmt = this.con.prepareStatement(prop.getValue("query_getAllUsers"), ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+				this.rs = this.pstmt.executeQuery();
+				rs.last();
+				ResultSetMetaData rsmd = rs.getMetaData();
+				int numCols = rsmd.getColumnCount();
+				int numFils = rs.getRow();
+				array = new Object[numFils][numCols];
+				rs.beforeFirst();
+				int j=0;
+				while(rs.next()) {
+					for(int i = 0; i<numCols;i++) {
+						array[j][i]=rs.getObject(i+1);
+					}
+					j++;
+				}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			return array;
+		}
+		
+		//----- SEARCH USERS------------
+		
+			public Object[][] Users(String username) {
+				username='%'+username+'%';
+				Object array[][]=null;
+				System.out.println(prop.getValue("query_getUsersByUsername"));
+				try {
+					this.pstmt = this.con.prepareStatement(prop.getValue("query_getUsersByUsername"), ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+					this.pstmt.setString(1, username);
+					this.rs = this.pstmt.executeQuery();
+					rs.last();
+					ResultSetMetaData rsmd = rs.getMetaData();
+					int numCols = rsmd.getColumnCount();
+					int numFils = rs.getRow();
+					array = new Object[numFils][numCols];
+					rs.beforeFirst();
+					int j=0;
+					while(rs.next()) {
+						for(int i = 0; i<numCols;i++) {
+							array[j][i]=rs.getObject(i+1);
+						}
+						j++;
+					}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				return array;
+			}
+		
 	//----- SEARCH BOARDS------------
 	
 	public Object[][] allBoards(String board_name) {

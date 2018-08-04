@@ -9,10 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
 import memm.org.DataBase;
+import memm.org.User;
 import memm.org.utilities.PropertiesReader;
 
 /**
@@ -39,9 +41,21 @@ public class Signup extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		JSONObject json = new JSONObject();
+		HttpSession session = request.getSession();
+		DataBase db = new DataBase();
+		PropertiesReader pr = PropertiesReader.getInstance();
 		
-		out.print(json.toString());
+		System.out.println("ESTOY AQUI g");
+		
+		String username = request.getParameter("username");
+		
+		if (username=="") {		
+			json.put("users", db.allUsers()).put("status", 200).put("response", pr.getValue("mssg_success"));
+		}else {
+			json.put("users", db.Users(username)).put("status", 200).put("response", pr.getValue("mssg_success"));
 		}
+		out.print(json.toString());
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -78,5 +92,34 @@ public class Signup extends HttpServlet {
 
 		out.print(json.toString());
 	}
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		JSONObject json = new JSONObject();
+		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
+		DataBase db = new DataBase();
+		PropertiesReader pr = PropertiesReader.getInstance();
+		
+		try {
+			Integer id = reqBody.getInt("user_id");
+			
+			if (id!=0) {
+				db.deleteUser(id);
+				json.put("status", 200).put("response", "user deleted");
+				System.out.println("user deleted");
+			}else {
+				json.put("response", "user does not exist").put("status", 400);
+ 		    	System.out.println("user does not exis");
+			}		
+		
+		}catch (Exception e) {
+			System.out.println("error");
+			System.out.println(e. getMessage());
+			e.printStackTrace();
+		}
+		
+		out.print(json.toString());
+		
+		}
 
 }

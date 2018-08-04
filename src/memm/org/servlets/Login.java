@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
+import Proxy.CheckAdminProxy;
 import memm.org.utilities.Encrypt;
 import memm.org.utilities.PropertiesReader;
 import memm.org.DataBase;
@@ -47,29 +48,28 @@ public class Login extends HttpServlet {
 		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
 		DataBase db = new DataBase();
 		PropertiesReader pr = PropertiesReader.getInstance();
+		CheckAdminProxy proxy = new CheckAdminProxy();		
 		
-		//if(session.isNew()) {
+		
 			String email = reqBody.getString("email"); 
 			String password = reqBody.getString("password");
 			
-			Integer userId = db.getUserId(email, Encrypt.returnEncrypt(password));			
+			Integer userId = db.getUserId(email, Encrypt.returnEncrypt(password));	
+			boolean isAdmin = proxy.checkAdmin(email);
 			
 			if(userId!=0) {
-					User user = new User(userId, db.username);
+					User user = new User(userId, db.username, isAdmin);
 					storeValue(user, session);
 					System.out.println(pr.getValue("mssg_successful"));
-					json.put("status", 200).put("response", pr.getValue("mssg_successful"));
-					System.out.println("Succesful login: "+ email+ "User ID:"+userId+ "Username"+db.username);
+					json.put("status", 200).put("response", pr.getValue("mssg_successful")).put("isAdmin", isAdmin);
+					System.out.println("Succesful login: "+ email+ " User ID: "+userId+ " Username "+db.username+" is Admin "+ isAdmin);
 			}else {
 				System.out.println(pr.getValue("mssg_wrong"));
 				json.put("response", pr.getValue("mssg_wrong")).put("status", 400);
 				session.invalidate();
-				System.out.println(pr.getValue("mssg_wrong"));
+				System.out.println("Wrong data");
 			}
-		//}else {
-			//json.put("response", "you're logged in").put("status", 400);
-			//System.out.println("Already log");
-		//}
+
 		System.out.println(json.toString());
 		System.out.println(session);
 		out.println(json.toString());

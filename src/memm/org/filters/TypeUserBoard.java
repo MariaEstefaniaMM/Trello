@@ -24,7 +24,7 @@ import memm.org.utilities.PropertiesReader;
  */
 
 
-@WebFilter(servletNames= {"Column", "Card", "UserBoard", "Comment", "Files"})
+@WebFilter(servletNames= {"Board","Column", "Card", "UserBoard", "Comment", "Files"})
 		   //urlPatterns= "/boards.html*")
 
 public class TypeUserBoard implements Filter {
@@ -61,24 +61,38 @@ public class TypeUserBoard implements Filter {
 		PropertiesReader pr = PropertiesReader.getInstance();
 		
 		Integer user_id = user.getId();
-		
+		boolean isAdmin = user.getIsAdmin();
+		System.out.println("is Admin"+ isAdmin);
 		
 		if(request.getMethod().equalsIgnoreCase(method.GET.name())){
 			System.out.println("Filterget");
 			chain.doFilter(request, response);
-	    } else {
+	    } else if(isAdmin){
+	    	System.out.println("admin");
+			chain.doFilter(request, response);
+	    }else{
 	    	Integer board_id = Integer.parseInt(request.getParameter("board_id"));
-			int typeUser = db.getTypeUserBoard(board_id, user_id);
+			int typeUserBoard = db.getTypeUserBoard(board_id, user_id);
 			
-			if (typeUser==1) {
+			if (typeUserBoard==1) {
 				System.out.println("Filtercase1");
 				chain.doFilter(request, response);
-			}else if (typeUser==2) {
+			}else if (typeUserBoard==2) {
 				if(request.getMethod().equalsIgnoreCase(method.POST.name())){
 					System.out.println("Filtercase2post");
 					chain.doFilter(request, response);
 			    }else {
 				switch (requestURI) {
+				case "/TrelloOrg/Board":
+					if (db.checkBoard(board_id)==user_id) {
+						System.out.println("Filtercase2");
+						chain.doFilter(request, response);
+					}else {
+						System.out.println(pr.getValue("mssg_notAllowed"));			
+						json.put("response", pr.getValue("mssg_notAllowed")).put("status", 403);
+						out.println(json.toString());
+					}
+					break;
 				case "/TrelloOrg/Column":
 					Integer column_id = Integer.parseInt(request.getParameter("column_id"));
 					if (db.checkColumn(column_id)==user_id) {
@@ -123,6 +137,11 @@ public class TypeUserBoard implements Filter {
 						out.println(json.toString());
 					}
 					break;
+				//case "/TrelloOrg/boards.html":
+					//String toReplace = requestURI.substring(requestURI.indexOf("/boards.html"),requestURI.lastIndexOf("/")+1);
+					//String newURI = requestURI.replace(toReplace, "?type=2");
+					//req.getRequestDispatcher(newURI).forward(req, res);
+					//break;
 				}
 			    }
 			}else {

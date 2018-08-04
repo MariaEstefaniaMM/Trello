@@ -24,7 +24,7 @@ import memm.org.utilities.PropertiesReader;
 @WebFilter(servletNames= {"Login", "Board", "Column", "Card", "Logout", "Signup", "UserBoard", "Comment", "Files"})
 //@WebFilter(value={"/*"})
 public class SessionFilter implements Filter {
-
+	enum method {GET, POST, PUT, DELETE}
     /**
      * Default constructor. 
      */
@@ -89,10 +89,16 @@ public class SessionFilter implements Filter {
 			
 		}else {
 			if(in) {
-				System.out.println("Already log");			
-				json.put("response", pr.getValue("mssg_logged")).put("status", 304);
-				//session.invalidate();
-				out.println(json.toString());
+				if(request.getMethod().equalsIgnoreCase(method.POST.name())) {
+					System.out.println("Already log");			
+					json.put("response", pr.getValue("mssg_logged")).put("status", 304);
+					//session.invalidate();
+					out.println(json.toString());
+				}else {
+					System.out.println("Filter to User");
+					chain.doFilter(request, response);
+				}
+				
 				
 			}else {
 				System.out.println("Filter");
